@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/flowerpop.wav-cba768bf35bbd164e6267102fb4ad635.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/flowerpop.wav"
+dest_files=[ "res://.import/flowerpop.wav-cba768bf35bbd164e6267102fb4ad635.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

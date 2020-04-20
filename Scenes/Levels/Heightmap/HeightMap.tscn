@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/Levels/Heightmap/HeightMap.gd" type="Script" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=2]
+seed = 666
+period = 2.5
+persistence = 0.4
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 50, 50 )
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="Shader" id=4]
+code = "shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_toon,specular_toon;
+uniform vec4 albedo : hint_color;
+
+uniform float height_scale = 0.5;
+uniform sampler2D noise;
+uniform sampler2D normalmap;
+
+varying vec2 vertex_position;
+
+void vertex() {
+  vertex_position = VERTEX.xz / 2.0;
+  float height = texture(noise, UV).x * height_scale;
+  //VERTEX.y += height * height_scale;
+  VERTEX.y += height;
+}
+
+void fragment() {
+	ALBEDO = albedo.rgb;
+	METALLIC = 0.0;
+	ROUGHNESS = 1.0;
+	SPECULAR = 0.5;
+	
+	NORMALMAP = texture(normalmap, UV).xyz;
+}
+"
+
+[sub_resource type="NoiseTexture" id=5]
+flags = 0
+width = 10
+height = 10
+noise = SubResource( 2 )
+
+[sub_resource type="NoiseTexture" id=6]
+flags = 0
+width = 100
+height = 100
+as_normalmap = true
+bump_strength = 3.1
+noise = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 4 )
+shader_param/albedo = Color( 0.0196078, 0.0196078, 0.0196078, 1 )
+shader_param/height_scale = 1.0
+shader_param/noise = SubResource( 5 )
+shader_param/normalmap = SubResource( 6 )
+
+[sub_resource type="HeightMapShape" id=8]
+map_width = 10
+map_depth = 10
+map_data = PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+
+[node name="HeightMap" type="StaticBody"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 1 )
+simplex = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+cast_shadow = 2
+mesh = SubResource( 3 )
+material/0 = SubResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 5.1, 0, 0, 0, 1, 0, 0, 0, 5.1, 0, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5912, 2.1405, -3.48395 )
+visible = false
+omni_range = 5.7

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cargo_destroyed.wav-14cb3a501d94eff29bea89857a73ff9a.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/cargo_destroyed.wav"
+dest_files=[ "res://.import/cargo_destroyed.wav-14cb3a501d94eff29bea89857a73ff9a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
