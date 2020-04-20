@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Levels/Map/Map.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Audio/songiguess.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Scenes/Levels/TestWorld/TestWorld.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Textures/pointer.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Textures/leaf.png" type="Texture" id=5]
@@ -45,6 +46,7 @@ projection = 1
 size = 200.0
 
 [node name="Minimap" type="Sprite" parent="."]
+visible = false
 position = Vector2( 10, 10 )
 texture = SubResource( 3 )
 centered = false
@@ -76,4 +78,9 @@ __meta__ = {
 }
 
 [node name="MainMenu" parent="." instance=ExtResource( 6 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -12.0
+autoplay = true
 [connection signal="begin_game" from="MainMenu" to="." method="begin_game"]

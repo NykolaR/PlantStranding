@@ -26,6 +26,7 @@ func end_game() -> void:
 	for child in $PlayerHolder.get_children():
 		$PlayerHolder.remove_child(child)
 	
+	$Minimap.visible = false
 	$MainMenu.begin_menu()
 
 func begin_game() -> void:
@@ -42,3 +43,4 @@ func begin_game() -> void:
 	#player.set_camera($Camera)
 	#$Camera.set_target(player.get_camera_target())
 	$Camera.current = false
+	$Minimap.visible = true

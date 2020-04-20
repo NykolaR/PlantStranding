@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/songiguess.ogg-8f817fc58134749d269453504ddcb29b.oggstr"
+
+[deps]
+
+source_file="res://Assets/Audio/songiguess.ogg"
+dest_files=[ "res://.import/songiguess.ogg-8f817fc58134749d269453504ddcb29b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -451,7 +451,8 @@ collision_mask = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
 stream = ExtResource( 3 )
 unit_db = -80.0
-max_db = -10.0
+unit_size = 2.0
+max_db = -8.0
 pitch_scale = 0.25
 autoplay = true
 [connection signal="timeout" from="LifeSpan" to="AnimationPlayer" method="play" binds= [ "End" ]]
