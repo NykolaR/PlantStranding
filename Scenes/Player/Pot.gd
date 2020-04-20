@@ -16,7 +16,7 @@ export var soaked : Color
 var total_growth : float = 0
 var moisture : float = 70
 var rain_count : int = 0
-var health : int = 100
+var health : float = 100
 var can_plant : bool = false
 
 var bar_box : StyleBoxFlat
@@ -26,6 +26,7 @@ signal cargo_down
 
 func _ready() -> void:
 	bar_box = bar.get_stylebox("fg")
+	bar_box.set("bg_color", moist)
 	update_cargo_health()
 	set_process(false)
 
@@ -43,7 +44,7 @@ func _process(delta: float) -> void:
 	top.transform.origin.y = stem.scale.y * 0.3 - 0.005
 
 func pot_hurt(body: Node) -> void:
-	health -= 2
+	health -= 1
 	if not $Timer.is_stopped():
 		pot_hit.play()
 	$Hurtbox/CollisionShape.disabled = true
@@ -60,7 +61,7 @@ func rain_exited(area: Area) -> void:
 
 func update_cargo_health() -> void:
 	health = clamp(health, 0, 100)
-	health_label.text = "CARGO HEALTH\n" + str(health) + "%"
+	health_label.text = "CARGO HEALTH\n" + ("%1.1f" % health) + "%"
 	health_label.modulate.g = health / 100.0
 	health_label.modulate.b = health / 100.0
 
@@ -101,11 +102,12 @@ func plant_update() -> void:
 	bar.value = moisture
 	
 	if moisture >= 75:
-		health -= 1
+		health -= 0.2
 	if moisture <= 25:
-		health -= 1
+		health -= 0.5
 	
 	update_cargo_health()
+	health_test()
 
 func planted() -> void:
 	$Timer.stop()

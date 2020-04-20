@@ -11,7 +11,7 @@ func _ready() -> void:
 		spawn_rain()
 
 func spawn_rain() -> void:
-	if rains.get_child_count() > 25 or randf() < 0.5:
+	if rains.get_child_count() >= 25 or randf() < 0.1:
 		return
 	
 	var rain : Spatial = rain_scene.instance()
